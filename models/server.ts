@@ -6,12 +6,16 @@ import { config } from "../config/config";
 class Server {
   private app: Application;
   private port: string;
-  private apiPaths: Record<string, unknown>;
+  // private apiPaths: {
+  //   randomRoute: "/route"
+  // };
 
   constructor() {
     this.app = express();
     this.port = config.port;
-    this.apiPaths = {};
+
+    this.middlewares();
+    this.routes();
   }
 
   async dbConnect(): Promise<void> {}
@@ -21,7 +25,9 @@ class Server {
     this.app.use(express.static("public"));
   }
 
-  routes(): void {}
+  routes(): void {
+    // this.app.use(this.apiPaths.randomRoute, randomRouter)
+  }
 
   listen(): void {
     this.app.listen(this.port, () => {
